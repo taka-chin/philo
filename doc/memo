@@ -1,0 +1,20 @@
+What is Thread?
+
+ask Chat GPT 
+--------------------------------------------------------------------------------------------------------
+thread is the smallest unit of a computer progrems's execution
+threads are part of process and multiple threads with the same process can share the same resources
+--------------------------------------------------------------------------------------------------------
+
+How to use Thread?
+
+ask Chat GPT
+--------------------------------------------------------------------------------------------------------
+Include the pthread.h
+To use the POSIX Threads library
+
+Compile with the -Ipthread flag
+When compiling you need -Ipthread flag
+--------------------------------------------------------------------------------------------------------
+
+
