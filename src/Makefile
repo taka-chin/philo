@@ -1,39 +1,33 @@
 NAME = philo
 
 CC = cc
+
 CFLAGS = -Wall -Wextra -Werror
+CFLAGS += -g
 
-SRCS_DIR = srcs
-SRCS = $(SRCS_DIR)/main.c \
-		$(SRCS_DIR)/repl.c	\
-		$(SRCS_DIR)/init.c
+SRCS	=	main.c \
+			error.c \
+			log.c \
+			pthread.c \
 
-RM = rm -rf
+OBJS    =    ${SRCS:.c=.o}
 
-OBJS_DIR = objs
-OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
+RM    =    rm -f
 
-INCLUDES_DIR = includes
-INCLUDES = -I$(INCLUDES_DIR) -I$(LIBRARY_DIR)/$(INCLUDES_DIR) -I$(RL_DIR)/include
+all:${NAME}
 
-$(NAME): $(OBJS) $(LIBRARY_AFILE)
-	$(CC) $(CFLAGS) -o $@ $^ $(RL_FLAGS)
-
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(LIBRARY_AFILE):
-	$(MAKE) -C $(LIBRARY_DIR)
-
-all: $(NAME)
+$(NAME):$(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -o $(NAME)
+	
+%.o: %.c
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
-	$(RM) $(OBJS_DIR) $(LIBRARY_DIR)/$(OBJS_DIR)
+	${RM} ${OBJS} 
+fclean:clean
+	${RM} ${NAME}
 
-fclean: clean
-	$(RM) $(NAME) $(LIBRARY_AFILE)
+re:fclean all
 
-re: fclean all
-
-.PHONY: all clean fclean re
+.PHONY:
+	all clean fclean re 
