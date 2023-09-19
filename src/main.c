@@ -15,24 +15,14 @@ t_args *init_args(char **input)
 	t_args *philo;
 
 	philo = malloc(sizeof(t_args *));
-	philo->number = atoi(input[0]);
-	philo->time_die = atoi(input[1]);
-	philo->time_eat = atoi(input[2]);
-	philo->time_sleep = atoi(input[3]);
-	if(input[4] != NULL)
-		philo->must_eat = atoi(input[4]);
+	philo->number = ft_atoi(input[1]);
+	philo->time_die = ft_atoi(input[2]);
+	philo->time_eat = ft_atoi(input[3]);
+	philo->time_sleep = ft_atoi(input[4]);
+	if(input[5] != NULL)
+		philo->must_eat = ft_atoi(input[5]);
 	return(philo);
 }
-
-/* void *hogehoge(pthread_mutex_t *mut) */
-/* { */
-/* 	if(pthread_mutex_lock(mut) != 0) */
-/* 		ft_put_error(PTHREAD_ERROR); */
-/* 	printf("in hogehoge lock"); */
-/* 	if(pthread_mutex_unlock(mut) != 0) */
-/* 		ft_put_error(PTHREAD_ERROR); */
-/* 	return(NULL); */
-/* } */
 
 int main(int argc,char *argv[])
 {

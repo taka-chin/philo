@@ -45,6 +45,7 @@ enum e_error_type
 	PTHREAD_ERROR
 };
 
+int	ft_atoi(const char *str);
 void ft_put_error(int e_error_type);
 void put_log(int philo,int state);
 void debug_printf(t_args *s);

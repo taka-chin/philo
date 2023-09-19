@@ -11,6 +11,7 @@ SRCS	:=	main.c \
 				error.c \
 				log.c \
 				pthread.c \
+				ft_atoi.c \
 
 SRCS	:=	$(addprefix ${SRCS_DIR}/, ${SRCS})
 
