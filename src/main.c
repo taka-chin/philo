@@ -24,16 +24,22 @@ t_args *init_args(char **input)
 	return(philo);
 }
 
+/* init_fork(int number) */
+/* { */
+
+/* } */
+
 int main(int argc,char *argv[])
 {
 	t_args *input;
 	pthread_mutex_t mut ;
 
-	pthread_mutex_init(&mut,NULL);
 	if(argc < 5 || argc >= 7)
 		ft_put_error(ARGS_ERROR);
+	pthread_mutex_init(&mut,NULL);
 	input = init_args(argv);
 	pthreads_create(&mut);
+	/* init_fork(input->number); */
 
 	put_log(input->number,BEFORE_EAT);
 	put_log(input->number,EAT);

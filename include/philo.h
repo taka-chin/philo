@@ -5,6 +5,7 @@
 #include <sys/time.h>
 #include <sysexits.h>
 #include <pthread.h>
+#include <limits.h>
 
 typedef struct s_args
 {
@@ -46,6 +47,7 @@ enum e_error_type
 };
 
 int	ft_atoi(const char *str);
+int	ft_isdigit(int c);
 void ft_put_error(int e_error_type);
 void put_log(int philo,int state);
 void debug_printf(t_args *s);
