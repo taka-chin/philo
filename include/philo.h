@@ -31,6 +31,16 @@ typedef struct s_args
 	int must_eat;
 }t_args;
 
+typedef struct s_philo
+{
+	int id;
+	int state;
+	int eat_count;
+	int last_eat_time;
+	pthread_mutex_t *left_fork;
+	pthread_mutex_t *right_fork;
+}t_philo;
+
 enum e_state
 {
 	BEFORE_EAT,

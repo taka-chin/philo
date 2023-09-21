@@ -29,6 +29,27 @@ t_args *init_args(char **input)
 
 /* } */
 
+t_philo *init_philo(t_args *input)
+{
+	int i;
+	t_philo *philo;
+
+	i = 0;
+	while(i < input->number)
+	{
+		philo = malloc(sizeof(t_philo *));
+		if(philo == NULL)
+			ft_put_error();
+		philo->number = input->number;
+		philo->time_die = input->time_die;
+		philo->time_eat = input->time_eat;
+		philo->time_sleep = input->time_sleep;
+		philo->must_eat = input->must_eat;
+		i++;
+	}
+	return(philo);
+}
+
 int main(int argc,char *argv[])
 {
 	t_args *input;
@@ -39,6 +60,7 @@ int main(int argc,char *argv[])
 	pthread_mutex_init(&mut,NULL);
 	input = init_args(argv);
 	pthreads_create(&mut);
+	init_philo(input);
 	/* init_fork(input->number); */
 
 	put_log(input->number,BEFORE_EAT);
