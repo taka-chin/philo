@@ -13,6 +13,7 @@ SRCS	:=	main.c \
 				pthread.c \
 				ft_atoi.c \
 				ft_isdigit.c \
+				ft_calloc.c \
 
 SRCS	:=	$(addprefix ${SRCS_DIR}/, ${SRCS})
 

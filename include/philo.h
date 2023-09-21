@@ -6,6 +6,7 @@
 #include <sysexits.h>
 #include <pthread.h>
 #include <limits.h>
+#include <stdbool.h>
 
 typedef struct s_args
 {
@@ -31,14 +32,21 @@ typedef struct s_args
 	int must_eat;
 }t_args;
 
+typedef struct s_fork
+{
+	pthread_mutex_t fork;
+	int last_id;
+	bool now_use;
+}t_fork;
+
 typedef struct s_philo
 {
 	int id;
 	int state;
 	int eat_count;
 	int last_eat_time;
-	pthread_mutex_t *left_fork;
-	pthread_mutex_t *right_fork;
+	t_fork *left_fork;
+	t_fork *right_fork;
 }t_philo;
 
 enum e_state
@@ -53,6 +61,7 @@ enum e_state
 enum e_error_type
 {
 	ARGS_ERROR,
+	MALLOC_ERROR,
 	PTHREAD_ERROR
 };
 
@@ -64,5 +73,6 @@ void debug_printf(t_args *s);
 t_args *init_args(char **input);
 void pthreads_create();
 void *hogehoge(void *mut);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

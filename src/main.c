@@ -10,6 +10,16 @@ void debug_printf(t_args *s)
 		printf("number :%d\n",s->must_eat);
 }
 
+void debug_printf_philo(t_philo *s)
+{
+	printf("id :%d\n",s->id);
+	printf("state :%d\n",s->state);
+	printf("eat_count :%d\n",s->eat_count);
+	printf("last_count :%d\n",s->last_eat_time);
+	printf("left fork :%d\n",s->left_fork->last_id);
+	printf("right fork :%d\n",s->right_fork->last_id);
+}
+
 t_args *init_args(char **input)
 {
 	t_args *philo;
@@ -24,43 +34,63 @@ t_args *init_args(char **input)
 	return(philo);
 }
 
-/* init_fork(int number) */
-/* { */
+t_fork init_fork(t_args* input)
+{
+	t_fork *fork;
+	pthread_mutex_t mut ;
+	int i;
 
-/* } */
+	i = 0;
+	fork = ft_calloc(input->number,sizeof(t_fork));
+	if(fork == NULL)
+	{
+		free(fork);
+		ft_put_error(MALLOC_ERROR);
+	}
+	while(i < input->number)
+	{
+		fork[i].fork = pthread_mutex_init(&mut,NULL);
+		fork[i].last_id = 0;
+		fork[i].now_use = false;
+		i++;
+	}
+	return(fork);
+}
 
-t_philo *init_philo(t_args *input)
+t_philo *init_philo(t_args *input,t_fork *fork)
 {
 	int i;
 	t_philo *philo;
 
 	i = 0;
+	philo = malloc(sizeof(t_philo )*((input->number)+1));
+	if(philo == NULL)
+		free_philo(philo);
 	while(i < input->number)
 	{
-		philo = malloc(sizeof(t_philo *));
-		if(philo == NULL)
-			ft_put_error();
-		philo->number = input->number;
-		philo->time_die = input->time_die;
-		philo->time_eat = input->time_eat;
-		philo->time_sleep = input->time_sleep;
-		philo->must_eat = input->must_eat;
+		philo[i].id = input->number;
+		philo[i].state = BEFORE_EAT;
+		philo[i].eat_count = 0;
+		philo[i].last_eat_time = 0;
+		philo[i].left_fork = fork[i];
 		i++;
 	}
+	philo[i] = NULL:
 	return(philo);
 }
 
 int main(int argc,char *argv[])
 {
 	t_args *input;
-	pthread_mutex_t mut ;
+	t_fork *fork;
+	t_philo *philo;
 
 	if(argc < 5 || argc >= 7)
 		ft_put_error(ARGS_ERROR);
-	pthread_mutex_init(&mut,NULL);
 	input = init_args(argv);
 	pthreads_create(&mut);
-	init_philo(input);
+	fork = init_fork(input);
+	philo = init_philo(input,fork);
 	/* init_fork(input->number); */
 
 	put_log(input->number,BEFORE_EAT);

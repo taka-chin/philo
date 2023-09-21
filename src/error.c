@@ -8,10 +8,15 @@ void ft_put_error(int e_error_type)
 		printf("invaild args");
 		exit(EX_USAGE);
 	}
+	else if(e_error_type == MALLOC_ERROR)
+	{
+		printf("PTHREAD_ERROR");
+		exit(EXIT_FAILURE); 
+	}
 	else if(e_error_type == PTHREAD_ERROR)
 	{
 		printf("PTHREAD_ERROR");
-		exit(1);
+		exit(EXIT_FAILURE); 
 	}
 }
 
