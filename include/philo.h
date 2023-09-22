@@ -7,6 +7,7 @@
 #include <pthread.h>
 #include <limits.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 typedef struct s_args
 {
@@ -74,5 +75,6 @@ t_args *init_args(char **input);
 void pthreads_create();
 void *hogehoge(void *mut);
 void	*ft_calloc(size_t count, size_t size);
+void	ft_bzero(void *s, size_t n);
 
 #endif

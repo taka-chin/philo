@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tyamauch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 13:35:14 by tyamauch          #+#    #+#             */
-/*   Updated: 2023/09/21 19:31:03 by tyamauch         ###   ########.fr       */
+/*   Created: 2022/10/20 21:33:45 by tyamauch          #+#    #+#             */
+/*   Updated: 2022/10/20 21:33:48 by tyamauch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_bzero(void *s, size_t n)
 {
-	void	*p;
+	unsigned char	*str;
 
-	if (count == 0 || size == 0)
+	str = (unsigned char *)s;
+	while (n)
 	{
-		p = malloc(1);
-		if (!p)
-		{
-			return (NULL);
-		}
-		ft_bzero(p, 1);
-		return (p);
+		*str = '\0';
+		str++;
+		n--;
 	}
-	if (count > SIZE_MAX / size)
-		return (NULL);
-	p = malloc(size * count);
-	if (!p)
-		return (NULL);
-	ft_bzero(p, size * count);
-	return (p);
 }
