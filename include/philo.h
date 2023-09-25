@@ -8,6 +8,8 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <unistd.h>
+
 
 typedef struct s_args
 {
@@ -46,14 +48,16 @@ typedef struct s_philo
 	int state;
 	int eat_count;
 	int last_eat_time;
+	pthread_t thread;
 	t_fork *left_fork;
 	t_fork *right_fork;
+	t_args *info;
 }t_philo;
 
 enum e_state
 {
-	BEFORE_EAT,
 	EAT,
+	BEFORE_EAT,
 	SLEEP,
 	THINK,
 	DIED
@@ -71,12 +75,16 @@ int	ft_isdigit(int c);
 void ft_put_error(int e_error_type);
 void put_log(int philo,int state);
 void debug_printf(t_args *s);
-t_args *init_args(char **input);
-void pthreads_create();
-void *hogehoge(void *mut);
+t_args *init_args(int argc, char **input);
+void pthreads_create(t_philo *philo);
+void pthreads_join(t_philo *philo);
+void *eating(void *arg);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 void debug_printf(t_args *s);
 void debug_printf_philo(t_philo *s);
+void *dead_or_alive(void *arg);
+void all_free();
+void pthreads_destory(t_fork *fork, int number);
 
 #endif
