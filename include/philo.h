@@ -76,5 +76,7 @@ void pthreads_create();
 void *hogehoge(void *mut);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
+void debug_printf(t_args *s);
+void debug_printf_philo(t_philo *s);
 
 #endif

@@ -15,6 +15,7 @@ SRCS	:=	main.c \
 				ft_isdigit.c \
 				ft_calloc.c \
 				ft_bzero.c \
+				debug.c \
 
 SRCS	:=	$(addprefix ${SRCS_DIR}/, ${SRCS})
 

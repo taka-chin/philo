@@ -1,25 +1,5 @@
 #include "philo.h"
 
-void debug_printf(t_args *s)
-{
-	printf("number :%d\n",s->number);
-	printf("number :%d\n",s->time_die);
-	printf("number :%d\n",s->time_eat);
-	printf("number :%d\n",s->time_sleep);
-	if(&(s->must_eat) != NULL)
-		printf("number :%d\n",s->must_eat);
-}
-
-void debug_printf_philo(t_philo *s)
-{
-	printf("id :%d\n",s->id);
-	printf("state :%d\n",s->state);
-	printf("eat_count :%d\n",s->eat_count);
-	printf("last_count :%d\n",s->last_eat_time);
-	printf("left fork :%d\n",s->left_fork->last_id);
-	printf("right fork :%d\n",s->right_fork->last_id);
-}
-
 t_args *init_args(char **input)
 {
 	t_args *philo;
