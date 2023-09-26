@@ -3,6 +3,7 @@ NAME = philo
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
+CFLAGS += -pthread
 CFLAGS += -g
 
 SRCS_DIR = src

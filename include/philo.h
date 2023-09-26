@@ -13,25 +13,19 @@
 
 typedef struct s_args
 {
-	/* The number of philosophers and also the number */
-	/* of forks. */
+	/* The number of philosophers and forks */
 	int number;
 
-	/* If a philosopher didn’t start eating time_to_die */
-	/* milliseconds since the beginning of their last meal or the beginning of the simulation, they die. */
+	/* time_to_die */
 	int time_die;
 
 	/* The time it takes for a philosopher to eat. */
-	/* During that time, they will need to hold two forks. */
 	int time_eat; 
 
 	/* The time a philosopher will spend sleeping. */
 	int time_sleep;
 
-	/* If all */
-	/* philosophers have eaten at least number_of_times_each_philosopher_must_eat */
-	/* times, the simulation stops. If not specified, the simulation stops when a */
-	/* philosopher dies. */
+	/* philosophers have eaten at least */ 
 	int must_eat;
 }t_args;
 

@@ -1,8 +1,12 @@
 #include "philo.h"
 
-void all_free()
+void all_free(void *s1,void *s2)
 {
 	printf("all free\n");
+	if(s1 != NULL)
+		free(s1);
+	if(s2 != NULL)
+		free(s2);
 }
 
 void pthreads_join(t_philo *philo)
@@ -16,7 +20,7 @@ void pthreads_join(t_philo *philo)
 		p = &philo[i];
 		if(pthread_join(p->thread, NULL) != 0)
 		{
-			all_free();
+			/* all_free(); */
 			ft_put_error(PTHREAD_ERROR);
 		}
 		i++;
@@ -25,16 +29,16 @@ void pthreads_join(t_philo *philo)
 
 void pthreads_create(t_philo *philo)
 {
-	t_philo *p;
+	t_philo *philo_p;
 	int	i;
 
 	i = 0;
 	while(i < philo->info->number)
 	{
-		p = &philo[i];
-		if(pthread_create(&p->thread, NULL, dead_or_alive, p) != 0)
+		philo_p = &philo[i];
+		if(pthread_create(&philo_p->thread, NULL, dead_or_alive, (void*)philo_p) != 0)
 		{
-			all_free();
+			/* all_free(); */
 			ft_put_error(PTHREAD_ERROR);
 		}
 		i++;
@@ -43,16 +47,16 @@ void pthreads_create(t_philo *philo)
 
 void pthreads_destory(t_fork *fork, int number)
 {
-	t_fork *f;
+	t_fork *fork_p;
 	int	i;
 
 	i = 0;
 	while(i < number)
 	{
-		f = &fork[i];
-		if(pthread_mutex_destroy(&f->fork) != 0)
+		fork_p = &fork[i];
+		if(pthread_mutex_destroy(&fork_p->fork) != 0)
 		{
-			all_free();
+			/* all_free(); */
 			ft_put_error(PTHREAD_ERROR);
 		}
 		i++;

@@ -5,6 +5,11 @@ t_args *init_args(int argc, char **input)
 	t_args *info;
 
 	info = ft_calloc(sizeof(t_args), 1);
+	if(info == NULL)
+	{
+		ft_put_error(MALLOC_ERROR);
+		return(NULL);
+	}
 	info->number = ft_atoi(input[1]);
 	info->time_die = ft_atoi(input[2]);
 	info->time_eat = ft_atoi(input[3]);
@@ -19,21 +24,26 @@ t_args *init_args(int argc, char **input)
 t_fork *init_fork(t_args* input)
 {
 	t_fork *fork;
-	t_fork *f;
+	t_fork *fork_p;
 	int i;
 
 	i = 0;
 	fork = ft_calloc(input->number, sizeof(t_fork));
 	if(fork == NULL)
 	{
-		free(fork);
+		all_free(input,NULL);
 		ft_put_error(MALLOC_ERROR);
+		return(NULL);
 	}
 	while(i < input->number)
 	{
-		f = &fork[i];
-		if(pthread_mutex_init(&f->fork,NULL) != 0)
+		fork_p = &fork[i];
+		if(pthread_mutex_init(&fork_p->fork,NULL) != 0)
+		{
+			all_free(input,fork);
 			ft_put_error(PTHREAD_ERROR);
+			return(NULL);
+		}
 		i++;
 	}
 	return(fork);
@@ -48,8 +58,9 @@ t_philo *init_philo(t_args *input,t_fork *fork)
 	philo = ft_calloc(input->number, sizeof(t_philo));
 	if(philo == NULL)
 	{
+		all_free(input,fork);
 		ft_put_error(MALLOC_ERROR);
-		return (NULL);
+		return(NULL);
 	}
 	while(i < input->number)
 	{
