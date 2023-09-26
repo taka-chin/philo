@@ -86,5 +86,8 @@ void debug_printf_philo(t_philo *s);
 void *dead_or_alive(void *arg);
 void all_free();
 void pthreads_destory(t_fork *fork, int number);
+t_args *init_args(int argc, char **input);
+t_fork *init_fork(t_args* input);
+t_philo *init_philo(t_args *input,t_fork *fork);
 
 #endif

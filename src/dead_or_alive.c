@@ -14,8 +14,10 @@ void *dead_or_alive(void *arg)
 
 	philo = (t_philo *)arg;
 	cnt = 0;
-	while(cnt < philo->info->must_eat)
+	while(true)
 	{
+		if(cnt == philo->info->must_eat)
+			break ;
 		if(philo->id % 2 == 0)
 			usleep(200);
 		if(pthread_mutex_lock(&philo->left_fork->fork) != 0)

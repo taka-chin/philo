@@ -5,36 +5,6 @@ void all_free()
 	printf("all free\n");
 }
 
-//state
-/* void *eating(void *arg) */
-/* { */
-/* 	t_philo *philo; */
-
-/* 	philo = (t_philo *)arg; */
-/* 	if(pthread_mutex_lock(philo->left_fork) != 0) */
-/* 	{ */
-/* 		all_free(); */
-/* 		ft_put_error(PTHREAD_ERROR); */
-/* 	} */
-/* 	if(pthread_mutex_lock(philo->right_fork) != 0) */
-/* 	{ */
-/* 		all_free(); */
-/* 		ft_put_error(PTHREAD_ERROR); */
-/* 	} */
-/* 	put_log(philo->id,EAT); */
-/* 	if(pthread_mutex_unlock(philo->left_fork) != 0) */
-/* 	{ */
-/* 		all_free(); */
-/* 		ft_put_error(PTHREAD_ERROR); */
-/* 	} */
-/* 	if(pthread_mutex_unlock(philo->right_fork) != 0) */
-/* 	{ */
-/* 		all_free(); */
-/* 		ft_put_error(PTHREAD_ERROR); */
-/* 	} */
-/* 	return(NULL); */
-/* } */
-
 void pthreads_join(t_philo *philo)
 {
 	t_philo *p;
@@ -53,7 +23,6 @@ void pthreads_join(t_philo *philo)
 	}
 }
 
-/* void pthreads_create(pthread_mutex_t *mut) */
 void pthreads_create(t_philo *philo)
 {
 	t_philo *p;
@@ -71,8 +40,6 @@ void pthreads_create(t_philo *philo)
 		i++;
 	}
 }
-	/* if(pthread_mutex_destroy(mut) != 0) */
-	/* 	ft_put_error(PTHREAD_ERROR); */
 
 void pthreads_destory(t_fork *fork, int number)
 {

@@ -17,6 +17,7 @@ SRCS	:=	main.c \
 				ft_bzero.c \
 				debug.c \
 				dead_or_alive.c \
+				init.c \
 
 SRCS	:=	$(addprefix ${SRCS_DIR}/, ${SRCS})
 
