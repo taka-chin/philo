@@ -41,11 +41,12 @@ typedef struct s_philo
 	int id;
 	int state;
 	int eat_count;
-	int last_eat_time;
 	pthread_t thread;
 	t_fork *left_fork;
 	t_fork *right_fork;
 	t_args *info;
+	struct timeval start_time;
+	struct timeval last_time;
 }t_philo;
 
 enum e_state
@@ -67,7 +68,7 @@ enum e_error_type
 int	ft_atoi(const char *str);
 int	ft_isdigit(int c);
 void ft_put_error(int e_error_type);
-void put_log(int philo,int state);
+void put_log(t_philo *philo,int state);
 void debug_printf(t_args *s);
 t_args *init_args(int argc, char **input);
 void pthreads_create(t_philo *philo);

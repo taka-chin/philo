@@ -11,22 +11,24 @@
 /* 	printf(FMT, time, philo, message); */
 /* } */
 
-
-
-void put_log(int philo,int e_state)
+void put_log(t_philo *philo,int e_state)
 {
 	struct timeval tp;
+	long int log_time;
 
 	gettimeofday(&tp,NULL);
+	log_time = (tp.tv_sec - philo->start_time.tv_sec) * 1000000;
+	log_time += (tp.tv_usec - philo->start_time.tv_usec);
+	log_time /= 1000;
 
 	if(e_state == BEFORE_EAT)
-		printf("[time:%ld] [philo:%d] has taken a fork\n",tp.tv_sec,philo);
+		printf("%ld %d has taken a fork\n",log_time,philo->id);
 	else if(e_state == EAT)
-		printf("[time:%ld] [philo:%d] is eating\n",tp.tv_sec,philo);
+		printf("%ld %d is eating\n",log_time,philo->id);
 	else if(e_state == SLEEP)
-		printf("[time:%ld] [philo:%d] is sleeping\n",tp.tv_sec,philo);
+		printf("%ld %d is sleeping\n",log_time,philo->id);
 	else if(e_state == THINK)
-		printf("[time:%ld] [philo:%d] is thinking\n",tp.tv_sec,philo);
+		printf("%ld %d is thinking\n",log_time,philo->id);
 	else if(e_state == DIED)
-		printf("[time:%ld] [philo:%d] died\n",tp.tv_sec,philo);
+		printf("%ld %d died\n",log_time,philo->id);
 }

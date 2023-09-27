@@ -44,6 +44,8 @@ int main(int argc,char *argv[])
 	philo = init_philo(input,fork);
 	if(philo == NULL)
 		return(1);
+	//error handring
+	//sart_time;
 	pthreads_create(philo);
 	pthreads_join(philo);
 	pthreads_destory(fork, input->number);

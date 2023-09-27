@@ -31,11 +31,17 @@ void pthreads_create(t_philo *philo)
 {
 	t_philo *philo_p;
 	int	i;
+	struct timeval tp;
 
 	i = 0;
+	gettimeofday(&tp,NULL);
 	while(i < philo->info->number)
 	{
 		philo_p = &philo[i];
+		philo_p->start_time.tv_sec = tp.tv_sec;
+		philo_p->start_time.tv_usec = tp.tv_usec;
+		philo_p->last_time.tv_sec = tp.tv_sec;
+		philo_p->last_time.tv_usec = tp.tv_usec;
 		if(pthread_create(&philo_p->thread, NULL, dead_or_alive, (void*)philo_p) != 0)
 		{
 			/* all_free(); */
