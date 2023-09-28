@@ -17,10 +17,11 @@ void put_log(t_philo *philo,int e_state)
 	long int log_time;
 
 	gettimeofday(&tp,NULL);
-	/* log_time = (tp.tv_sec - philo->start_time.tv_sec) * 1000000; */
-	log_time = (tp.tv_sec - philo->start_time.tv_sec) * 1000;
-	log_time += (tp.tv_usec - philo->start_time.tv_usec)/1000;
-
+	log_time = (tp.tv_sec - philo->start_time.tv_sec) * 1000000;
+	log_time += tp.tv_usec - philo->start_time.tv_usec;
+	log_time /= 1000;
+	/* log_time = (tp.tv_sec - philo->start_time.tv_sec) * 1000; */
+	/* log_time += (tp.tv_usec - philo->start_time.tv_usec)/1000; */
 	if(e_state == BEFORE_EAT)
 		printf("%ld %d has taken a fork\n",log_time,philo->id);
 	else if(e_state == EAT)

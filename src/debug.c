@@ -15,7 +15,6 @@ void debug_printf_philo(t_philo *s)
 	printf("id :%d\n",s->id);
 	printf("state :%d\n",s->state);
 	printf("eat_count :%d\n",s->eat_count);
-	printf("last_count :%d\n",s->last_eat_time);
 	printf("left fork :%d\n",s->left_fork->last_id);
 	if(s->right_fork != NULL)
 		printf("right fork :%d\n",s->right_fork->last_id);

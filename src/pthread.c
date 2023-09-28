@@ -30,11 +30,17 @@ void pthreads_join(t_philo *philo)
 void pthreads_create(t_philo *philo)
 {
 	t_philo *philo_p;
+	pthread_t admin;
 	int	i;
 	struct timeval tp;
 
 	i = 0;
 	gettimeofday(&tp,NULL);
+	if(pthread_create(&admin, NULL,observe, (void*)philo) != 0)
+	{
+		/* all_free(); */
+		ft_put_error(PTHREAD_ERROR);
+	}
 	while(i < philo->info->number)
 	{
 		philo_p = &philo[i];
