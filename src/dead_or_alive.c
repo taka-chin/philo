@@ -2,8 +2,11 @@
 
 static bool is_dead(t_philo *philo)
 {
-	philo = (void *)philo;
-	if(false)
+	struct timeval now;
+
+	philo->last_time.tv_sec *1000;
+	philo->last_time.tv_usec /1000;
+	if(jujde_time >= philo->info->time_die)
 		return(true);
 	return(false);
 }
@@ -26,13 +29,13 @@ static bool death_game(t_philo *philo)
 		return(false);
 	}
 	gettimeofday(&philo->last_time, NULL);
-	usleep(philo->info->time_eat * 1000);
+	usleep(philo->info->time_eat *1000);
 	if(pthread_mutex_unlock(&philo->left_fork->fork) != 0)
 		ft_put_error(PTHREAD_ERROR);
 	if(pthread_mutex_unlock(&philo->right_fork->fork) != 0)
 		ft_put_error(PTHREAD_ERROR);
 	put_log(philo,SLEEP);
-	usleep(philo->info->time_sleep * 1000);
+	usleep(philo->info->time_sleep *1000);
 	put_log(philo,THINK);
 	return(true);
 }
