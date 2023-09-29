@@ -43,7 +43,7 @@ typedef struct s_philo
 	t_fork			*left_fork;
 	t_fork			*right_fork;
 	pthread_mutex_t	mutex_philo;
-	struct timeval	last_time;
+	struct timeval	active_time;
 	t_share			*share;
 }t_philo;
 
@@ -67,20 +67,20 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 void	ft_put_error(int e_error_type);
 void	put_log(t_philo *philo,int state);
-void	debug_printf(t_args *s);
-t_args	*init_args(int argc, char **input);
+void	debug_printf(t_info *s);
 void	pthreads_create(t_philo *philo);
 void	pthreads_join(t_philo *philo);
 void	*eating(void *arg);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
-void	debug_printf(t_args *s);
+void	debug_printf(t_info *s);
 void	debug_printf_philo(t_philo *s);
 void	*dead_or_alive(void *arg);
+void	*observe(void *arg);
 void	all_free();
 void	pthreads_destory(t_fork *fork, int number);
-t_args	*init_args(int argc, char **input);
-t_fork	*init_fork(t_args* input);
-t_philo	*init_philo(t_args *input,t_fork *fork);
+t_info	*init_info(int argc, char **input);
+t_fork	*init_fork(t_info* input);
+t_philo	*init_philo(t_info *input,t_fork *fork);
 
 #endif

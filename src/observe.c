@@ -1,17 +1,19 @@
 #include "philo.h"
 
-bool eat(t_philo *philo)
+static bool happy_end(t_philo *philo)
 {
-
+	if(philo != NULL)
+		return (true);
+	else
+		return(false);
 }
 
-bool philo(t_philo *philo)
+static bool bad_end(t_philo *philo)
 {
-	pthread_mutex_lock(philo->);
-		true;
-	if(hoge)
-	pthread_mutex_lock(philo->);
-	return();
+	if(philo != NULL)
+		return (true);
+	else
+		return(false);
 }
 
 void *observe(void *arg)
@@ -21,8 +23,10 @@ void *observe(void *arg)
 	philo = (t_philo *)arg;
 	while(true)
 	{
-		if()
-
+		if(happy_end(philo))
+			break;
+		else if(bad_end(philo))
+			break;
 	}
-
+	return(NULL);
 }

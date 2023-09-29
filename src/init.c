@@ -1,10 +1,10 @@
 #include "philo.h"
 
-t_args *init_args(int argc, char **input)
+t_info *init_info(int argc, char **input)
 {
-	t_args *info;
+	t_info *info;
 
-	info = ft_calloc(sizeof(t_args), 1);
+	info = ft_calloc(sizeof(t_info), 1);
 	if(info == NULL)
 	{
 		ft_put_error(MALLOC_ERROR);
@@ -21,7 +21,7 @@ t_args *init_args(int argc, char **input)
 	return(info);
 }
 
-t_fork *init_fork(t_args* input)
+t_fork *init_fork(t_info* input)
 {
 	t_fork *fork;
 	t_fork *fork_p;
@@ -49,7 +49,7 @@ t_fork *init_fork(t_args* input)
 	return(fork);
 }
 
-t_philo *init_philo(t_args *input,t_fork *fork)
+t_philo *init_philo(t_info *input,t_fork *fork)
 {
 	int i;
 	t_philo *philo;
@@ -67,7 +67,7 @@ t_philo *init_philo(t_args *input,t_fork *fork)
 		philo[i].id = i + 1;
 		philo[i].left_fork = &fork[i];
 		philo[i].right_fork = &fork[(i + 1) % input->number];
-		philo[i].info = input;
+		philo[i].share->info = input;
 		i++;
 	}
 	return(philo);

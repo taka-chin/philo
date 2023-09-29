@@ -24,7 +24,7 @@ static int input_check(char **input)
 
 int main(int argc,char *argv[])
 {
-	t_args *input;
+	t_info *input;
 	t_fork *fork;
 	t_philo *philo;
 
@@ -35,7 +35,7 @@ int main(int argc,char *argv[])
 	}
 	if(input_check(argv) != 0)
 		return(1);
-	input = init_args(argc, argv);
+	input = init_info(argc, argv);
 	if(input == NULL)
 		return(1);
 	fork = init_fork(input);

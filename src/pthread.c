@@ -15,7 +15,7 @@ void pthreads_join(t_philo *philo)
 	int i;
 
 	i = 0;
-	while(i < philo->info->number)
+	while(i < philo->share->info->number)
 	{
 		p = &philo[i];
 		if(pthread_join(p->thread, NULL) != 0)
@@ -41,13 +41,13 @@ void pthreads_create(t_philo *philo)
 		/* all_free(); */
 		ft_put_error(PTHREAD_ERROR);
 	}
-	while(i < philo->info->number)
+	while(i < philo->share->info->number)
 	{
 		philo_p = &philo[i];
-		philo_p->start_time.tv_sec = tp.tv_sec;
-		philo_p->start_time.tv_usec = tp.tv_usec;
-		philo_p->last_time.tv_sec = tp.tv_sec;
-		philo_p->last_time.tv_usec = tp.tv_usec;
+		philo_p->share->start_time.tv_sec = tp.tv_sec;
+		philo_p->share->start_time.tv_usec = tp.tv_usec;
+		/* philo_p->last_time.tv_sec = tp.tv_sec; */
+		/* philo_p->last_time.tv_usec = tp.tv_usec; */
 		if(pthread_create(&philo_p->thread, NULL, dead_or_alive, (void*)philo_p) != 0)
 		{
 			/* all_free(); */
