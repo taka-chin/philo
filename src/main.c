@@ -26,6 +26,7 @@ int main(int argc,char *argv[])
 {
 	t_info *input;
 	t_fork *fork;
+	t_share *share;
 	t_philo *philo;
 
 	if(argc < 5 || argc >= 7)
@@ -41,7 +42,10 @@ int main(int argc,char *argv[])
 	fork = init_fork(input);
 	if(fork == NULL)
 		return(1);
-	philo = init_philo(input,fork);
+	share = init_share(input);
+	if(share == NULL)
+		return(1);
+	philo = init_philo(input,fork,share);
 	if(philo == NULL)
 		return(1);
 	//error handring

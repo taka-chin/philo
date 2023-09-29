@@ -81,6 +81,7 @@ void	all_free();
 void	pthreads_destory(t_fork *fork, int number);
 t_info	*init_info(int argc, char **input);
 t_fork	*init_fork(t_info* input);
-t_philo	*init_philo(t_info *input,t_fork *fork);
+t_share *init_share(t_info *input);
+t_philo	*init_philo(t_info *input,t_fork *fork,t_share *share);
 
 #endif

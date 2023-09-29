@@ -21,6 +21,20 @@ t_info *init_info(int argc, char **input)
 	return(info);
 }
 
+t_share *init_share(t_info *input)
+{
+	t_share *share;
+
+	share = ft_calloc(sizeof(t_share), 1);
+	if(share == NULL)
+	{
+		ft_put_error(MALLOC_ERROR);
+		return(NULL);
+	}
+	share->info = input;
+	return(share);
+}
+
 t_fork *init_fork(t_info* input)
 {
 	t_fork *fork;
@@ -49,7 +63,7 @@ t_fork *init_fork(t_info* input)
 	return(fork);
 }
 
-t_philo *init_philo(t_info *input,t_fork *fork)
+t_philo *init_philo(t_info *input,t_fork *fork,t_share *share)
 {
 	int i;
 	t_philo *philo;
@@ -67,7 +81,7 @@ t_philo *init_philo(t_info *input,t_fork *fork)
 		philo[i].id = i + 1;
 		philo[i].left_fork = &fork[i];
 		philo[i].right_fork = &fork[(i + 1) % input->number];
-		philo[i].share->info = input;
+		philo[i].share = share;
 		i++;
 	}
 	return(philo);
