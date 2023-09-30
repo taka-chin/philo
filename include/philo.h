@@ -79,6 +79,8 @@ void	*dead_or_alive(void *arg);
 void	*observe(void *arg);
 void	all_free();
 void	pthreads_destory(t_fork *fork, int number);
+bool 	is_dead(t_philo *philo);
+bool    check_finish(t_philo *philo);
 t_info	*init_info(int argc, char **input);
 t_fork	*init_fork(t_info* input);
 t_share *init_share(t_info *input);

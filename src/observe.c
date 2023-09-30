@@ -10,10 +10,19 @@ static bool happy_end(t_philo *philo)
 
 static bool bad_end(t_philo *philo)
 {
-	if(philo != NULL)
-		return (true);
-	else
-		return(false);
+	bool flag;
+
+	flag = false;
+	if(pthread_mutex_lock(&philo->share->mutex_finish) != 0)
+		ft_put_error(PTHREAD_ERROR);
+	if(is_dead(philo))
+	{
+		philo->share->finish = true;
+		flag = true;
+	}
+	if(pthread_mutex_unlock(&philo->share->mutex_finish) != 0)
+		ft_put_error(PTHREAD_ERROR);
+	return(flag);
 }
 
 void *observe(void *arg)
