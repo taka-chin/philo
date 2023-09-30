@@ -21,6 +21,7 @@ SRCS	:=	main.c \
 				dead_or_alive.c \
 				init.c \
 				observe.c \
+				check.c \
 
 SRCS	:=	$(addprefix ${SRCS_DIR}/, ${SRCS})
 
