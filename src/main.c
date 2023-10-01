@@ -7,27 +7,21 @@ int main(int argc,char *argv[])
 	t_share *share;
 	t_philo *philo;
 
-	if(argc < 5 || argc >= 7)
-	{
-		ft_put_error(ARGS_ERROR);
-		return(1);
-	}
-	if(input_check(argv) == false)
-		return(1);
+	if(input_check(argc, argv) == false)
+		return(ft_put_error(ARGS_ERROR));
 	input = init_info(argc, argv);
-	if(input == NULL)
-		return(1);
+	if(!input)
+		return(ft_put_error(ARGS_ERROR));
 	fork = init_fork(input);
-	if(fork == NULL)
-		return(1);
+	if(!fork)
+		return(ft_put_error(ARGS_ERROR));
 	share = init_share(input);
-	if(share == NULL)
-		return(1);
+	if(!share)
+		return(ft_put_error(ARGS_ERROR));
 	philo = init_philo(input,fork,share);
-	if(philo == NULL)
-		return(1);
+	if(!philo)
+		return(ft_put_error(ARGS_ERROR));
 	pthreads_create(philo);
-	pthreads_join(philo);
 	pthreads_destory(fork, input->number);
 	return (0);
 }

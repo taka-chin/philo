@@ -1,11 +1,12 @@
 #include "philo.h"
 
-void pthreads_join(t_philo *philo)
+void pthreads_join(t_philo *philo, pthread_t admin)
 {
 	t_philo *p;
 	int i;
 
 	i = 0;
+	pthread_join(admin, NULL);
 	while(i < philo->share->info->number)
 	{
 		p = &philo[i];
@@ -23,16 +24,16 @@ void pthreads_create(t_philo *philo)
 
 	i = 0;
 	gettimeofday(&tp,NULL);
-	/* pthread_create(&admin, NULL, observe, (void*)philo); */
+	pthread_create(&admin, NULL, observe, (void*)philo);
 	while(i < philo->share->info->number)
 	{
 		philo_p = &philo[i];
 		philo_p->share->start_time.tv_sec = tp.tv_sec;
 		philo_p->share->start_time.tv_usec = tp.tv_usec;
-		pthread_create(&admin, NULL, observe, (void*)philo);
 		pthread_create(&philo_p->thread, NULL, dead_or_alive, (void*)philo_p);
 		i++;
 	}
+	pthreads_join(philo, admin);
 }
 
 void pthreads_destory(t_fork *fork, int number)

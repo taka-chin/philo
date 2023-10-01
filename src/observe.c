@@ -41,6 +41,7 @@ void *observe(void *arg)
 			break;
 		else if(bad_end(philo))
 			break;
+		usleep(100);
 	}
 	return(NULL);
 }

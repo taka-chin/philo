@@ -1,9 +1,11 @@
 #include "philo.h"
 
-bool input_check(char **input)
+bool input_check(int argc, char **input)
 {
 	const char	*str;
 
+	if(argc < 5 || argc >= 7)
+		return (false);
 	while (*++input)
 	{
 		str = *input;
@@ -24,20 +26,19 @@ bool input_check(char **input)
 
 bool is_dead(t_philo *philo)
 {
-	long int judge_time;
 	long int log_time;
 	bool	flag;
-
+	
 	flag = false;
 	pthread_mutex_lock(&philo->mutex_philo);
-	judge_time = philo->active_time;
-	if(judge_time >= philo->share->info->time_die *1000)
+	if(philo->active_time >= philo->share->info->time_die)
 	{
 		log_time = create_time(philo);
 		printf("%ld %d died\n",log_time,philo->id);
 		philo->share->finish = true;
 		flag = true;
 	}
+	printf("%ld %d\n", philo->active_time, philo->share->info->time_die);
 	pthread_mutex_unlock(&philo->mutex_philo);
 	return(flag);
 }
@@ -51,7 +52,7 @@ bool is_stuffed(t_philo *philo)
 	flag = true;
 	i = 0;
 	if(philo->share->info->must_eat == -1)
-		return(flag);
+		return(false);
 	while(i < philo->share->info->number)
 	{
 		p = &philo[i];

@@ -11,6 +11,8 @@
 #include <stdint.h>
 #include <unistd.h>
 
+#define ERROR 1
+
 typedef struct s_info
 {
 	int number;
@@ -66,13 +68,13 @@ enum e_error_type
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
-bool 	input_check(char **input);
+bool 	input_check(int argc, char **input);
 long int create_time(t_philo *philo);
-void	ft_put_error(int e_error_type);
+int		ft_put_error(int e_error_type);
 void	put_log(t_philo *philo,int state);
 void	debug_printf(t_info *s);
 void	pthreads_create(t_philo *philo);
-void	pthreads_join(t_philo *philo);
+void	pthreads_join(t_philo *philo, pthread_t admin);
 void	*eating(void *arg);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
