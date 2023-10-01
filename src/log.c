@@ -17,10 +17,6 @@ void put_log(t_philo *philo,int e_state)
 	long int log_time;
 
 	pthread_mutex_lock(&philo->share->mutex_finish);
-	/* gettimeofday(&tp,NULL); */
-	/* log_time = (tp.tv_sec - philo->share->start_time.tv_sec) * 1000000; */
-	/* log_time += tp.tv_usec - philo->share->start_time.tv_usec; */
-	/* log_time /= 1000; */
 	log_time = create_time(philo);
 	if(philo->share->finish)
 		;

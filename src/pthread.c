@@ -1,14 +1,5 @@
 #include "philo.h"
 
-void all_free(void *s1,void *s2)
-{
-	printf("all free\n");
-	if(s1 != NULL)
-		free(s1);
-	if(s2 != NULL)
-		free(s2);
-}
-
 void pthreads_join(t_philo *philo)
 {
 	t_philo *p;
@@ -32,12 +23,13 @@ void pthreads_create(t_philo *philo)
 
 	i = 0;
 	gettimeofday(&tp,NULL);
-	pthread_create(&admin, NULL,observe, (void*)philo);
+	/* pthread_create(&admin, NULL, observe, (void*)philo); */
 	while(i < philo->share->info->number)
 	{
 		philo_p = &philo[i];
 		philo_p->share->start_time.tv_sec = tp.tv_sec;
 		philo_p->share->start_time.tv_usec = tp.tv_usec;
+		pthread_create(&admin, NULL, observe, (void*)philo);
 		pthread_create(&philo_p->thread, NULL, dead_or_alive, (void*)philo_p);
 		i++;
 	}
@@ -56,4 +48,3 @@ void pthreads_destory(t_fork *fork, int number)
 		i++;
 	}
 }
-

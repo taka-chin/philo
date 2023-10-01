@@ -43,7 +43,8 @@ typedef struct s_philo
 	t_fork			*left_fork;
 	t_fork			*right_fork;
 	pthread_mutex_t	mutex_philo;
-	struct timeval	active_time;
+	/* struct timeval	active_time; */
+	long int 	active_time;
 	t_share			*share;
 }t_philo;
 
@@ -65,7 +66,8 @@ enum e_error_type
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
-int 	input_check(char **input);
+bool 	input_check(char **input);
+long int create_time(t_philo *philo);
 void	ft_put_error(int e_error_type);
 void	put_log(t_philo *philo,int state);
 void	debug_printf(t_info *s);
@@ -78,9 +80,10 @@ void	debug_printf(t_info *s);
 void	debug_printf_philo(t_philo *s);
 void	*dead_or_alive(void *arg);
 void	*observe(void *arg);
-void	all_free();
+void	all_free(void *s1 ,void *s2);
 void	pthreads_destory(t_fork *fork, int number);
 bool 	is_dead(t_philo *philo);
+bool 	is_stuffed(t_philo *philo);
 bool    check_finish(t_philo *philo);
 t_info	*init_info(int argc, char **input);
 t_fork	*init_fork(t_info* input);

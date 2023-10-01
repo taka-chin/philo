@@ -4,7 +4,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -pthread
-CFLAGS += -fsanitize=address
+# CFLAGS += -fsanitize=thread
 CFLAGS += -g
 
 SRCS_DIR = src
@@ -22,6 +22,7 @@ SRCS	:=	main.c \
 				init.c \
 				observe.c \
 				check.c \
+				utils.c \
 
 SRCS	:=	$(addprefix ${SRCS_DIR}/, ${SRCS})
 
