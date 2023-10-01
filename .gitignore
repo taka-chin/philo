@@ -46,6 +46,7 @@ philo
 # Kernel Module Compile Results
 *.mod*
 *.cmd
+*.swp
 .tmp_versions/
 modules.order
 Module.symvers
