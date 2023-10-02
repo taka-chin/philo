@@ -21,6 +21,7 @@ int main(int argc,char *argv[])
 	philo = init_philo(input,fork,share);
 	if(!philo)
 		return(all_free(input, fork,share));
+	pthread_mutex_init(&philo -> share -> mutex_finish, NULL);
 	pthreads_create(philo);
 	pthreads_destory(fork, input->number);
 	return (0);

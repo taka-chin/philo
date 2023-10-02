@@ -75,6 +75,7 @@ t_philo *init_philo(t_info *input,t_fork *fork,t_share *share)
 	}
 	while(i < input->number)
 	{
+		pthread_mutex_init(&philo[i].mutex_philo, NULL);
 		philo[i].id = i + 1;
 		philo[i].left_fork = &fork[i];
 		philo[i].right_fork = &fork[(i + 1) % input->number];

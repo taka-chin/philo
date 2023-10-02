@@ -28,25 +28,34 @@ bool is_dead(t_philo *philo)
 {
 	long int log_time;
 	bool	flag;
-	struct timeval now_time;
+	t_philo *p;
+	int i;
+	/* struct timeval now_time; */
 
-	gettimeofday(&now_time, NULL);	
+	/* gettimeofday(&now_time, NULL); */	
 	flag = false;
-	log_time = (now_time.tv_sec - philo->share->start_time.tv_sec) * 1000000;
-	log_time += now_time.tv_usec - philo->share->start_time.tv_usec;
-	log_time /= 1000;
-	pthread_mutex_lock(&philo->mutex_philo);
-	log_time = log_time - philo->active_time;
-	if(log_time > philo->share->info->time_die)
+	i = 0;
+	/* log_time = (now_time.tv_sec - philo->share->start_time.tv_sec) * 1000000; */
+	/* log_time += now_time.tv_usec - philo->share->start_time.tv_usec; */
+	/* log_time /= 1000; */
+	while(i < philo->share->info->number)
 	{
+		p = &philo[i];
+		pthread_mutex_lock(&philo->mutex_philo);
 		log_time = create_time(philo);
-		printf("%ld %d died\n",log_time,philo->id);
-		pthread_mutex_lock(&philo-> share -> mutex_finish);
-		philo->share->finish = true;
-		pthread_mutex_unlock(&philo->share -> mutex_finish);
-		flag = true;
+		log_time -=  philo->active_time;
+		pthread_mutex_unlock(&philo->mutex_philo);
+		if(log_time > philo->share->info->time_die)
+		{
+			log_time = create_time(philo);
+			printf("%ld %d died\n",log_time,philo->id);
+			pthread_mutex_lock(&philo-> share -> mutex_finish);
+			philo->share->finish = true;
+			pthread_mutex_unlock(&philo->share -> mutex_finish);
+			flag = true;
+		}
+		i++;
 	}
-	pthread_mutex_unlock(&philo->mutex_philo);
 	return(flag);
 }
 

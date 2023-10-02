@@ -24,15 +24,19 @@ void pthreads_create(t_philo *philo)
 
 	i = 0;
 	gettimeofday(&tp,NULL);
-	pthread_create(&admin, NULL, observe, (void*)philo);
 	while(i < philo->share->info->number)
 	{
 		philo_p = &philo[i];
+		pthread_mutex_lock(&philo_p->mutex_philo);//
 		philo_p->share->start_time.tv_sec = tp.tv_sec;
+		pthread_mutex_unlock(&philo_p->mutex_philo);
+		pthread_mutex_lock(&philo_p->mutex_philo);
 		philo_p->share->start_time.tv_usec = tp.tv_usec;
+		pthread_mutex_unlock(&philo_p->mutex_philo);
 		pthread_create(&philo_p->thread, NULL, dead_or_alive, (void*)philo_p);
 		i++;
 	}
+	pthread_create(&admin, NULL, observe, (void*)philo);
 	pthreads_join(philo, admin);
 }
 
