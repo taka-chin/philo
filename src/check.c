@@ -37,7 +37,6 @@ bool is_dead(t_philo *philo)
 	log_time /= 1000;
 	pthread_mutex_lock(&philo->mutex_philo);
 	log_time = log_time - philo->active_time;
-	pthread_mutex_unlock(&philo->mutex_philo);
 	if(log_time > philo->share->info->time_die)
 	{
 		log_time = create_time(philo);
@@ -47,6 +46,7 @@ bool is_dead(t_philo *philo)
 		pthread_mutex_unlock(&philo->share -> mutex_finish);
 		flag = true;
 	}
+	pthread_mutex_unlock(&philo->mutex_philo);
 	return(flag);
 }
 
