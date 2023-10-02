@@ -82,7 +82,7 @@ void	debug_printf(t_info *s);
 void	debug_printf_philo(t_philo *s);
 void	*dead_or_alive(void *arg);
 void	*observe(void *arg);
-void	all_free(void *s1 ,void *s2);
+int		all_free(void *s1 ,void *s2,void *s3);
 void	pthreads_destory(t_fork *fork, int number);
 bool 	is_dead(t_philo *philo);
 bool 	is_stuffed(t_philo *philo);
