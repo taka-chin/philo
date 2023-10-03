@@ -38,15 +38,14 @@ bool	is_dead(t_philo *philo)
 	{
 		p = &philo[i];
 		log_time = create_time(philo);
-		//date race
+		pthread_mutex_lock(&p->mutex_philo);
 		jugde_time = log_time - (p->active_time);
+		pthread_mutex_unlock(&p->mutex_philo);
 		if (jugde_time > p->share->info->time_die)
 		{
-			pthread_mutex_lock(&p->share->mutex_finish);
 			put_log(philo, DIED);
-			philo->share->finish = true;
-			pthread_mutex_unlock(&p->share->mutex_finish);
 			flag = true;
+			break;
 		}
 		i++;
 	}
@@ -78,7 +77,10 @@ bool	is_stuffed(t_philo *philo)
 bool	check_finish(t_philo *philo)
 {
 	bool	flag;
+	int i;
 
+	i = 0;
+	flag = false;
 	pthread_mutex_lock(&philo->share->mutex_finish);
 	flag = philo->share->finish;
 	pthread_mutex_unlock(&philo->share->mutex_finish);

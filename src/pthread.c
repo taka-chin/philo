@@ -1,12 +1,11 @@
 #include "philo.h"
 
-void	pthreads_join(t_philo *philo, pthread_t admin)
+void	pthreads_join(t_philo *philo)
 {
 	t_philo	*p;
 	int		i;
 
 	i = 0;
-	pthread_join(admin, NULL);
 	while (i < philo->share->info->number)
 	{
 		p = &philo[i];
@@ -18,22 +17,28 @@ void	pthreads_join(t_philo *philo, pthread_t admin)
 void	pthreads_create(t_philo *philo)
 {
 	t_philo			*philo_p;
-	pthread_t		admin;
 	int				i;
 	struct timeval	tp;
 
 	i = 0;
-	gettimeofday(&tp, NULL);
-	pthread_create(&admin, NULL, observe, (void *)philo);
 	while (i < philo->share->info->number)
 	{
 		philo_p = &philo[i];
-		philo_p->share->start_time.tv_sec = tp.tv_sec;
-		philo_p->share->start_time.tv_usec = tp.tv_usec;
+		if(i == philo->share->info->number)
+		{
+			gettimeofday(&tp, NULL);
+			philo->share->start_time.tv_sec = tp.tv_sec;
+			philo->share->start_time.tv_usec = tp.tv_usec;
+		}
+		/* philo_p->share->start_time.tv_sec = tp.tv_sec; */
+		/* philo_p->share->start_time.tv_usec = tp.tv_usec; */
 		pthread_create(&philo_p->thread, NULL, dead_or_alive, (void *)philo_p);
+		pthread_mutex_lock(philo->mutex_philo);
+		philo->share->thread_num++;
+		pthread_mutex_unlock(philo->mutex_philo);
 		i++;
 	}
-	pthreads_join(philo, admin);
+	observe(philo);
 }
 
 void	pthreads_destory(t_fork *fork, int number)

@@ -24,9 +24,11 @@ typedef struct s_info
 
 typedef struct s_share
 {
-	pthread_mutex_t	mutex_finish;
+	/* pthread_mutex_t	mutex_finish; */
+	pthread_mutex_t	*mutex_finish;
 	bool			finish;
 	struct timeval	start_time;
+	int 			thread_num;
 	t_info			*info;
 }					t_share;
 
@@ -44,7 +46,7 @@ typedef struct s_philo
 	int				eat_count;
 	t_fork			*left_fork;
 	t_fork			*right_fork;
-	pthread_mutex_t	mutex_philo;
+	pthread_mutex_t	*mutex_philo;
 	/* struct timeval	active_time; */
 	long int		active_time;
 	t_share			*share;
@@ -74,14 +76,14 @@ int					ft_put_error(int e_error_type);
 void				put_log(t_philo *philo, int state);
 void				debug_printf(t_info *s);
 void				pthreads_create(t_philo *philo);
-void				pthreads_join(t_philo *philo, pthread_t admin);
+void				pthreads_join(t_philo *philo);
 void				*eating(void *arg);
 void				*ft_calloc(size_t count, size_t size);
 void				ft_bzero(void *s, size_t n);
 void				debug_printf(t_info *s);
 void				debug_printf_philo(t_philo *s);
 void				*dead_or_alive(void *arg);
-void				*observe(void *arg);
+void				*observe(t_philo *philo);
 int					all_free(void *s1, void *s2, void *s3);
 void				pthreads_destory(t_fork *fork, int number);
 bool				is_dead(t_philo *philo);
