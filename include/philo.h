@@ -46,7 +46,6 @@ typedef struct s_philo
 	t_fork			*left_fork;
 	t_fork			*right_fork;
 	pthread_mutex_t	*mutex_philo;
-	/* struct timeval	active_time; */
 	long int		active_time;
 	t_share			*share;
 }					t_philo;
@@ -92,5 +91,6 @@ t_info				*init_info(int argc, char **input);
 t_fork				*init_fork(t_info *input);
 t_share				*init_share(t_info *input);
 t_philo				*init_philo(t_info *input, t_fork *fork, t_share *share);
+int					get_thread_num(t_share *share);
 
 #endif

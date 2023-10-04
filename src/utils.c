@@ -12,8 +12,10 @@ int	all_free(void *s1, void *s2, void *s3)
 	return (1);
 }
 
-int	all_destory(void *s1, void *s2, void *s3)
+/* int	all_destory(void *s1, void *s2, void *s3) */
+int	all_destory(void *s1, int size1 ,void *s2, void *s3)
 {
+	ft_put_error(PTHREAD_ERROR);
 	printf("all destroy\n");
 	if (s1 != NULL)
 		pthread_mutex_destroy(s1);

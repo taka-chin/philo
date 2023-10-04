@@ -30,20 +30,17 @@ static bool	bad_end(t_philo *philo)
 	return (flag);
 }
 
-/* void	*observe(void *arg) */
 void	*observe(t_philo *philo)
 {
 	while(true)
 	{
-		pthread_mutex_lock(philo->mutex_philo);
-		if(philo->share->thread_num == philo->share->info->number)
+		if(get_thread_num(philo->share) == -1)
 			break;
-		pthread_mutex_unlock(philo->mutex_philo);
+		usleep(100);
 	}
-	pthread_mutex_unlock(philo->mutex_philo);
 	while (true)
 	{
-		if (happy_end(philo) || bad_end(philo))
+		if (bad_end(philo) || happy_end(philo))
 			break ;
 		usleep(100);
 	}

@@ -17,12 +17,19 @@ int main(int argc,char *argv[])
 		return(all_free(input, NULL,NULL));
 	share = init_share(input);
 	if(!share)
+	{
+		fork_destory(fork,-1);
 		return(all_free(input, fork,NULL));
+	}
 	philo = init_philo(input,fork,share);
 	if(!philo)
+	{
+		fork_destory(fork,-1);
+		share_destory(share);
 		return(all_free(input, fork,share));
+	}
 	pthreads_create(philo);
 	pthreads_join(philo);
-	pthreads_destory(fork, input->number);
+	pthreads_destory(fork,share,philo,input->number);
 	return (0);
 }

@@ -39,7 +39,7 @@ t_fork	*init_fork(t_info *input)
 		fork_p = &fork[i];
 		if (pthread_mutex_init(&fork_p->fork, NULL) != 0)
 		{
-			ft_put_error(PTHREAD_ERROR);
+			fork_destory(fork,i);
 			return (NULL);
 		}
 		i++;
@@ -59,7 +59,7 @@ t_share	*init_share(t_info *input)
 	}
 	if (pthread_mutex_init(&share->mutex_finish, NULL) != 0)
 	{
-		ft_put_error(PTHREAD_ERROR);
+		share_destory(share);
 		return (NULL);
 	}
 	share->thread_num = 1;
@@ -75,11 +75,15 @@ t_philo	*init_philo(t_info *input, t_fork *fork, t_share *share)
 
 	i = 0;
 	philo = ft_calloc(input->number, sizeof(t_philo));
-	mutex_philo = ft_calloc(1,sizeof(pthread_mutex_t));
-	pthread_mutex_init(mutex_philo, NULL); 
 	if (philo == NULL)
 	{
 		ft_put_error(MALLOC_ERROR);
+		return (NULL);
+	}
+	mutex_philo = ft_calloc(1,sizeof(pthread_mutex_t));
+	if(pthread_mutex_init(mutex_philo, NULL) != 0)
+	{
+		philo_destroy(philo);
 		return (NULL);
 	}
 	while (i < input->number)
