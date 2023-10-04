@@ -50,21 +50,18 @@ t_fork	*init_fork(t_info *input)
 t_share	*init_share(t_info *input)
 {
 	t_share	*share;
-	pthread_mutex_t	mutex_finish = PTHREAD_MUTEX_INITIALIZER;
 
-	/* mutex_finish = PTHREAD_MUTEX_INITIALIZER; */ 
 	share = ft_calloc(1, sizeof(t_share));
 	if (share == NULL)
 	{
 		ft_put_error(MALLOC_ERROR);
 		return (NULL);
 	}
-	/* if (pthread_mutex_init(&share->mutex_finish, NULL) != 0) */
-	/* { */
-	/* 	ft_put_error(PTHREAD_ERROR); */
-	/* 	return (NULL); */
-	/* } */
-	share->mutex_finish = mutex_finish;
+	if (pthread_mutex_init(&share->mutex_finish, NULL) != 0)
+	{
+		ft_put_error(PTHREAD_ERROR);
+		return (NULL);
+	}
 	share->thread_num = 1;
 	share->info = input;
 	return (share);

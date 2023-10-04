@@ -35,12 +35,12 @@ void	*observe(t_philo *philo)
 {
 	while(true)
 	{
-		pthread_mutex_lock(&philo->mutex_philo);
+		pthread_mutex_lock(philo->mutex_philo);
 		if(philo->share->thread_num == philo->share->info->number)
 			break;
-		pthread_mutex_unlock(&philo->mutex_philo);
+		pthread_mutex_unlock(philo->mutex_philo);
 	}
-	pthread_mutex_unlock(&philo->mutex_philo);
+	pthread_mutex_unlock(philo->mutex_philo);
 	while (true)
 	{
 		if (happy_end(philo) || bad_end(philo))

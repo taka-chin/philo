@@ -38,9 +38,9 @@ bool	is_dead(t_philo *philo)
 	{
 		p = &philo[i];
 		log_time = create_time(philo);
-		pthread_mutex_lock(&p->mutex_philo);
+		pthread_mutex_lock(p->mutex_philo);
 		jugde_time = log_time - (p->active_time);
-		pthread_mutex_unlock(&p->mutex_philo);
+		pthread_mutex_unlock(p->mutex_philo);
 		if (jugde_time > p->share->info->time_die)
 		{
 			put_log(philo, DIED);
@@ -65,10 +65,10 @@ bool	is_stuffed(t_philo *philo)
 	while (i < philo->share->info->number)
 	{
 		p = &philo[i];
-		pthread_mutex_lock(&p->mutex_philo);
+		pthread_mutex_lock(p->mutex_philo);
 		if (p->eat_count < p->share->info->must_eat)
 			flag = false;
-		pthread_mutex_unlock(&p->mutex_philo);
+		pthread_mutex_unlock(p->mutex_philo);
 		i++;
 	}
 	return (flag);
