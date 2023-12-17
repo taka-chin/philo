@@ -1,4 +1,10 @@
-#include "philo.h"
+#include "../include/philo.h"
+
+// input[1] number_of_philosophers
+// input[2] time_to_die
+// input[3] time_to_eat
+// input[4] timr_to_sleep
+// [input[5] number_of_times_each_philospher_must_eat]
 
 bool	input_check(int argc, char **input)
 {

@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "../include/philo.h"
 
 int	ft_put_error(int e_error_type)
 {

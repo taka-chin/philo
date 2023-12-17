@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "../include/philo.h"
 
 int main(int argc,char *argv[])
 {
@@ -18,18 +18,18 @@ int main(int argc,char *argv[])
 	share = init_share(input);
 	if(!share)
 	{
-		fork_destory(fork,-1);
+		// fork_destory(fork,-1);
 		return(all_free(input, fork,NULL));
 	}
 	philo = init_philo(input,fork,share);
 	if(!philo)
 	{
-		fork_destory(fork,-1);
-		share_destory(share);
+		// fork_destory(fork,-1);
+		// share_destory(share);
 		return(all_free(input, fork,share));
 	}
-	pthreads_create(philo);
-	pthreads_join(philo);
+	// pthreads_create(philo);
+	// pthreads_join(philo);
 	pthreads_destory(fork,share,philo,input->number);
 	return (0);
 }

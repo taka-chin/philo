@@ -2,13 +2,21 @@
 # define PHILO_H
 
 # include <limits.h>
+
 # include <pthread.h>
+
 # include <stdbool.h>
+
 # include <stdint.h>
+
 # include <stdio.h>
+
 # include <stdlib.h>
+
 # include <sys/time.h>
+
 # include <sysexits.h>
+
 # include <unistd.h>
 
 # define ERROR 1
