@@ -4,10 +4,10 @@ t_info	*init_info(int argc, char **input)
 {
 	t_info	*info;
 
-	info = ft_calloc(sizeof(t_info), 1);
+	info = ft_calloc(1,sizeof(t_info));
 	if (info == NULL)
 	{
-		ft_put_error(MALLOC_ERROR);
+		ft_put_error(CALLOC_ERROR);
 		return (NULL);
 	}
 	info->number = ft_atoi(input[1]);
@@ -31,15 +31,15 @@ t_fork	*init_fork(t_info *input)
 	fork = ft_calloc(input->number, sizeof(t_fork));
 	if (fork == NULL)
 	{
-		ft_put_error(MALLOC_ERROR);
+		ft_put_error(CALLOC_ERROR);
 		return (NULL);
 	}
 	while (i < input->number)
 	{
 		fork_p = &fork[i];
-		if (pthread_mutex_init(&fork_p->fork, NULL) != 0)
+		if (pthread_mutex_init(&fork_p->mutex_fork, NULL) != 0)
 		{
-			fork_destory(fork,i);
+			/* fork_destory(fork,i); */
 			return (NULL);
 		}
 		i++;
@@ -54,12 +54,12 @@ t_share	*init_share(t_info *input)
 	share = ft_calloc(1, sizeof(t_share));
 	if (share == NULL)
 	{
-		ft_put_error(MALLOC_ERROR);
+		ft_put_error(CALLOC_ERROR);
 		return (NULL);
 	}
 	if (pthread_mutex_init(&share->mutex_finish, NULL) != 0)
 	{
-		share_destory(share);
+		/* share_destory(share); */
 		return (NULL);
 	}
 	share->thread_num = 1;
@@ -77,13 +77,13 @@ t_philo	*init_philo(t_info *input, t_fork *fork, t_share *share)
 	philo = ft_calloc(input->number, sizeof(t_philo));
 	if (philo == NULL)
 	{
-		ft_put_error(MALLOC_ERROR);
+		ft_put_error(CALLOC_ERROR);
 		return (NULL);
 	}
 	mutex_philo = ft_calloc(1,sizeof(pthread_mutex_t));
 	if(pthread_mutex_init(mutex_philo, NULL) != 0)
 	{
-		philo_destroy(philo);
+		/* philo_destroy(philo); */
 		return (NULL);
 	}
 	while (i < input->number)

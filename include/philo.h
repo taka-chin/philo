@@ -32,6 +32,7 @@ typedef struct s_info
 
 typedef struct s_share
 {
+	//mutex_finishとfinishの違いを見直し
 	pthread_mutex_t	mutex_finish;
 	bool			finish;
 	struct timeval	start_time;
@@ -39,9 +40,10 @@ typedef struct s_share
 	t_info			*info;
 }					t_share;
 
+//見直し
 typedef struct s_fork
 {
-	pthread_mutex_t	fork;
+	pthread_mutex_t	mutex_fork;
 	int				last_id;
 	bool			now_use;
 }					t_fork;
@@ -70,7 +72,7 @@ enum				e_state
 enum				e_error_type
 {
 	ARGS_ERROR,
-	MALLOC_ERROR,
+	CALLOC_ERROR,
 	PTHREAD_ERROR
 };
 

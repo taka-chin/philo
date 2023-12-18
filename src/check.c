@@ -11,7 +11,10 @@ bool	input_check(int argc, char **input)
 	const char	*str;
 
 	if (argc < 5 || argc >= 7)
+	{
+		ft_put_error(ARGS_ERROR);
 		return (false);
+	}
 	while (*++input)
 	{
 		str = *input;
@@ -83,9 +86,9 @@ bool	is_stuffed(t_philo *philo)
 bool	check_finish(t_philo *philo)
 {
 	bool	flag;
-	int i;
+	/* int i; */
 
-	i = 0;
+	/* i = 0; */
 	flag = false;
 	pthread_mutex_lock(&philo->share->mutex_finish);
 	flag = philo->share->finish;
