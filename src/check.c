@@ -18,7 +18,7 @@ bool	input_check(int argc, char **input)
 	while (*++input)
 	{
 		str = *input;
-		if (str[0] == '+' || str[0] == '-')
+		if (str[0] == '+')
 			str++;
 		while (*str)
 		{

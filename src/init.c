@@ -39,7 +39,7 @@ t_fork	*init_fork(t_info *input)
 		fork_p = &fork[i];
 		if (pthread_mutex_init(&fork_p->mutex_fork, NULL) != 0)
 		{
-			/* fork_destory(fork,i); */
+			fork_destory(fork,i);
 			return (NULL);
 		}
 		i++;

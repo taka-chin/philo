@@ -24,6 +24,7 @@ SRCS	:=	main.c \
 				observe.c \
 				check.c \
 				utils.c \
+				destory.c \
 
 SRCS	:=	$(addprefix ${SRCS_DIR}/, ${SRCS})
 

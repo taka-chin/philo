@@ -80,7 +80,7 @@ int					ft_atoi(const char *str);
 int					ft_isdigit(int c);
 bool				input_check(int argc, char **input);
 long int			create_time(t_philo *philo);
-int					ft_put_error(int e_error_type);
+void					ft_put_error(int e_error_type);
 void				put_log(t_philo *philo, int state);
 void				debug_printf(t_info *s);
 void				pthreads_create(t_philo *philo);
@@ -102,5 +102,5 @@ t_fork				*init_fork(t_info *input);
 t_share				*init_share(t_info *input);
 t_philo				*init_philo(t_info *input, t_fork *fork, t_share *share);
 int					get_thread_num(t_share *share);
-
+void fork_destory(t_fork *fork,int i);
 #endif
